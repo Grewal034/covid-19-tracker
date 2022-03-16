@@ -1,12 +1,8 @@
-import React from "react";
+import React from 'react';
 
-// import Cards from "./components/Cards";
-// import CountryPicker from "./components/CountryPicker";
-// import Chart from "./components/Chart";
-
-import {Cards, Chart, CountryPicker} from "./components";
-import {fetchData} from "./api/index.js";
-import styles from "./App.module.css";
+import { Cards, CountryPicker, Chart } from './components';
+import { fetchData } from './api/';
+import styles from './App.module.css';
 
 import image from './images/image.png';
 
@@ -16,12 +12,17 @@ class App extends React.Component {
     country: '',
   }
 
-
   async componentDidMount() {
-  const data = await fetchData();
-  this.setState({ data });
-  console.log(data);
-}
+    const data = await fetchData();
+
+    this.setState({ data });
+  }
+
+  handleCountryChange = async (country) => {
+    const data = await fetchData(country);
+
+    this.setState({ data, country: country });
+  }
 
   render() {
     const { data, country } = this.state;
